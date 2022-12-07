@@ -10,6 +10,10 @@
 	<script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
 	<!-- Bootstrap 4 JS -->
 	<script type="text/javascript" src="{% static 'bs4/bootstrap.min.js' %}"></script>
+  <!-- Custom JS -->
+	<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'custom.css' %}" />
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
@@ -32,13 +36,14 @@
 		        <a class="nav-link text-white" href="/">Home</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="{%url 'category-list' %}">Categories</a>
+		        <a class="nav-link text-white" href="{% url 'category-list' %}">Categories</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="{%url 'brand-list' %}">Brands</a>
+		        <a class="nav-link text-white" href="{% url 'brand-list' %}">Brands</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="/cart.php"><i class="fa fa-shopping-cart"></i> Cart (2)</a>
+		        <a class="nav-link text-white" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart (<span 
+              class="cart-list" >{{request.session.cartdata|length}}</span>)</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link text-white" href="/account.php"><i class="fa fa-user"></i> My Account</a>

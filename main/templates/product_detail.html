@@ -13,34 +13,44 @@
 			<p>{{data.detail}}</p>
 			<hr/>
 			<table class="table table-bordered">
-				<tr>
-					<th>Price</th>
-					<th>Kyat. {{data.productattribute_set.first.price}}</th>
-				</tr>
+
 				<tr>
 					<th>Colors</th>
 					<td>
-                        {% for p_attr in data.productattribute_set.all %}
-						    <button class="btn btn-lg" style="background-color: {{p_attr.color.color_code}}" ></button>
+						{% for color in colors %}
+							<button class="btn btn-lg choose-color" data-color="{{color.color__id}}" 
+							style="background-color: {{color.color__color_code}}"></button>
                         {% endfor %}
 					</td>
 				</tr>
 				<tr>
 					<th>Sizes</th>
 					<td>
-                        {% for p_attr in data.productattribute_set.all %}
-						<button class="btn btn-outline-secondary btn-sm">{{p_attr.size.title}}</button>
+                        {% for size in sizes %}
+							<button data-price="{{size.price}}" class="btn btn-outline-secondary btn-sm choose-size 
+							color{{size.color__id}}">{{size.size__title}}</button>
 						{% endfor %}
 					</td>
 				</tr>
+				<tr>
+					<th>Price</th>
+					<th>Kyat.<span class="product-price" {{data.productattribute_set.first.price}}</th>
+				</tr>
 			</table>
+
 			<hr/>
+
 			<div class="input-group my-3" style="width:30%;">
-			  <input type="number" class="form-control" />
+			  <input type="number" value="1" class="form-control" id="productQty" />
 			  <div class="input-group-append">
-			    <button class="btn btn-primary btn-sm" type="button" id="button-addon2"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+				<input type="hidden" class="product-image" value="{{data.productattribute_set.first.image}}"/>
+          		<input type="hidden" class="product-id" value="{{data.id}}"/>
+          		<input type="hidden" class="product-title" value="{{data.title}}"/>
+			    <button class="btn btn-primary btn-sm" type="button" id="addToCartBtn"><i 
+					class="fa fa-shopping-cart"></i> Add to Cart</button>
 			  </div>
 			</div>
+
 		</div>
 	</div>
 	<hr />
@@ -97,6 +107,10 @@
 					<h6 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h6>
 				  </div>
 				  <div class="card-footer">
+					<input type="hidden" value="1" class="form-control product-qty-{{product.id}}" id="productQty" />
+          			<input type="hidden" class="product-image-{{product.id}}" value="{{data.productattribute_set.first.image}}"/>
+        			<input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}"/>
+          			<input type="hidden" class="product-title-{{product.id}}" value="{{product.title}}"/>
 					  <button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
 					  <button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
 					  <span class="float-right">
