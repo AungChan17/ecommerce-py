@@ -3,6 +3,8 @@ from .models import Banner,Category,Brand,Product,ProductAttribute
 from django.db.models import Max,Min,Count
 from django.http import JsonResponse,HttpResponse
 from django.template.loader import render_to_string
+from .forms import SignupForm
+
 
 # Create your views here.
 
@@ -175,6 +177,12 @@ def update_cart_item(request):
         'cartdata']),'total_amt':total_amt})
     return JsonResponse({'data':t,'totalitems':len(request.session[
         'cartdata'])})
+
+
+# SignUp
+def signup(request):
+    form=SignupForm
+    return render(request, 'registration/signup.html',{'form':form})
             
 
 
